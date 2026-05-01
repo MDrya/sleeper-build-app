@@ -1,0 +1,176 @@
+// ============================================================================
+// Legs Skill Tree — Squat Progressions
+// ============================================================================
+// Assisted Squat → Squat → Split Squat → Bulgarian → Step-up → Shrimp → Pistol
+// Equipment: none, elevated surface (stairs/bench)
+// Philosophy: Legs are half your body. Don't skip them because they're "not cool."
+// ============================================================================
+
+import type { SkillNode } from '../../models';
+import { createDefaultProgress } from '../../models';
+
+export const LEGS_TREE_NODES: SkillNode[] = [
+  {
+    id: 'legs_assisted_squat',
+    name: 'Assisted Squat',
+    description:
+      'Hold a doorframe, pole, or sturdy chair for balance. Squat down until thighs are parallel. Stand up. This teaches the squat pattern safely while building baseline leg strength.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 0,
+    equipment: ['none'],
+    formCues: ['heels flat', 'knees track toes', 'thighs parallel', 'upright torso'],
+    prerequisites: [],
+    masteryThreshold: { sets: 3, reps: 30, consecutiveDays: 3 },
+    expPerSet: 10,
+    masteryBonusExp: 150,
+    status: 'unlocked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_squat',
+    name: 'Bodyweight Squat',
+    description:
+      'Full depth squat with no assistance. Ass to grass. Arms forward for balance. This is the most natural human movement — reclaim it.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 0,
+    equipment: ['none'],
+    formCues: ['full depth (ATG)', 'heels flat', 'chest up', 'knees track toes', 'controlled'],
+    prerequisites: [{ nodeId: 'legs_assisted_squat', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 25, consecutiveDays: 3 },
+    expPerSet: 12,
+    masteryBonusExp: 200,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_calf_raise',
+    name: 'Single-Leg Calf Raise',
+    description:
+      'Stand on a step edge on one foot. Lower heel below the step, then rise to full extension. Hold the wall for balance. Builds ankle stability and calf endurance.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 0,
+    equipment: ['stairs'],
+    formCues: ['full ROM', 'pause at bottom stretch', 'slow tempo', 'each leg separately'],
+    prerequisites: [{ nodeId: 'legs_assisted_squat', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 25, consecutiveDays: 3 },
+    expPerSet: 10,
+    masteryBonusExp: 150,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_split_squat',
+    name: 'Split Squat',
+    description:
+      'One foot forward, one foot back (staggered stance). Lower back knee toward floor. Builds single-leg strength and balance — the bridge to pistol squats.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 1,
+    equipment: ['none'],
+    formCues: ['back knee to floor', 'front knee over ankle', 'upright torso', 'both legs equally'],
+    prerequisites: [{ nodeId: 'legs_squat', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 15, consecutiveDays: 3 },
+    expPerSet: 15,
+    masteryBonusExp: 300,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_hindu_squat',
+    name: 'Hindu Squat',
+    description:
+      'Continuous flowing squats on the balls of your feet. Heels come up, arms sweep back. Ancient wrestler conditioning — builds insane leg endurance and joint health.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 1,
+    equipment: ['none'],
+    formCues: ['heels lift', 'arms sweep', 'continuous flow', 'breathe with movement'],
+    prerequisites: [{ nodeId: 'legs_squat', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 30, consecutiveDays: 3 },
+    expPerSet: 15,
+    masteryBonusExp: 300,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_bulgarian',
+    name: 'Bulgarian Split Squat',
+    description:
+      'Rear foot elevated on a bench or stairs. All weight on the front leg. Deep single-leg squat. If this doesn\'t humble you, nothing will.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 2,
+    equipment: ['elevated_surface'],
+    formCues: ['rear foot elevated', 'front knee tracks toes', 'deep ROM', 'upright torso'],
+    prerequisites: [{ nodeId: 'legs_split_squat', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 12, consecutiveDays: 5 },
+    expPerSet: 22,
+    masteryBonusExp: 500,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_step_up',
+    name: 'Step-Up (High Box)',
+    description:
+      'Step up onto a high bench or staircase (knee height or higher) using only one leg. No pushing off the back foot. Pure single-leg power.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 2,
+    equipment: ['elevated_surface'],
+    formCues: ['high surface', 'no push-off from back foot', 'full lockout at top', 'controlled descent'],
+    prerequisites: [{ nodeId: 'legs_bulgarian', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 12, consecutiveDays: 3 },
+    expPerSet: 22,
+    masteryBonusExp: 400,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_shrimp',
+    name: 'Shrimp Squat',
+    description:
+      'Single-leg squat with the non-working leg held behind you (grab your ankle). Knee of the back leg touches the floor. Extreme balance and quad strength required.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 3,
+    equipment: ['none'],
+    formCues: ['grab rear ankle', 'rear knee to floor', 'upright torso', 'controlled throughout'],
+    prerequisites: [{ nodeId: 'legs_step_up', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 8, consecutiveDays: 5 },
+    expPerSet: 30,
+    masteryBonusExp: 800,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+  {
+    id: 'legs_pistol',
+    name: 'Pistol Squat',
+    description:
+      'The single-leg squat. One leg extended forward, squat all the way down on the other leg and stand back up. Requires strength, balance, flexibility, and ankle mobility. The complete leg exercise.',
+    category: 'legs',
+    exerciseType: 'reps',
+    minimumTier: 3,
+    equipment: ['none'],
+    formCues: ['extend non-working leg', 'full depth', 'heel flat', 'arms for balance', 'no wobble'],
+    prerequisites: [{ nodeId: 'legs_shrimp', requireMastery: true }],
+    masteryThreshold: { sets: 3, reps: 5, consecutiveDays: 5 },
+    expPerSet: 35,
+    masteryBonusExp: 1200,
+    status: 'locked',
+    progress: createDefaultProgress(),
+  },
+];
+
+export const LEGS_MAIN_PATH = [
+  'legs_assisted_squat',
+  'legs_squat',
+  'legs_split_squat',
+  'legs_bulgarian',
+  'legs_step_up',
+  'legs_shrimp',
+  'legs_pistol',
+];
